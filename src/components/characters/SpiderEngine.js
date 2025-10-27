@@ -30,7 +30,7 @@ const MARGINX = 10;
 const MARGINY = 10;
 
 const spiderSprite = new Image();
-spiderSprite.src = '../../images/spider_sprite.png';
+spiderSprite.src = process.env.PUBLIC_URL + 'images/spider_sprite.png';
 
 spiderSprite.addEventListener("load", () => {
     console.log("hellow!!!")
@@ -39,9 +39,9 @@ spiderSprite.addEventListener("load", () => {
 const SPRITE_LEN = 4;
 
 const SOUND_SRC = {
-    JUMP: '/sounds/jump.wav',
-    BREAK_BRICK: '/sounds/break_brick.wav',
-    ONE_UP: '/sounds/1-up.wav'
+    JUMP: process.env.PUBLIC_URL + 'sounds/jump.wav',
+    BREAK_BRICK: process.env.PUBLIC_URL + 'sounds/break_brick.wav',
+    ONE_UP: process.env.PUBLIC_URL + 'sounds/1-up.wav'
 };
 
 const SOUNDS = {};

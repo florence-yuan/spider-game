@@ -12,7 +12,7 @@ const SPEED = {
 const ERROR_MARGIN = 5;
 
 const sprite = new Image();
-sprite.src = '../../images/guest_sprite.png';
+sprite.src = process.env.PUBLIC_URL + 'images/guest_sprite.png';
 
 const SPRITE_LEN = 5;
 
