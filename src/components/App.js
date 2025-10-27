@@ -41,8 +41,7 @@ export default function App() {
 			});
 
 			if (type === 'next-scene') {
-				genGame(true);
-				engineRef.current.startGame();
+				startGame(true);
 			}
 	
 			setTimeout(() => {
@@ -108,6 +107,11 @@ export default function App() {
 		console.log(spiderRef.current)
 	}, []);
 
+	function startGame(clearPrev = false){
+		genGame(clearPrev);
+		engineRef.current.startGame();
+	}
+
 	useEffect(() => {
 		if (engineRef.current) {
 			return;
@@ -154,7 +158,7 @@ export default function App() {
 			<MsgBoard
 				msg={gameState}
 				setMsg={setGameState}
-				genGame={genGame}
+				startGame={startGame}
 				defaultState={defaultState}
 			/>
 			{!hasStarted && <div className="modal-wrapper">

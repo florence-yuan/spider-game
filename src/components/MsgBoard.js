@@ -1,4 +1,4 @@
-export default function MsgBoard({msg, setMsg, genGame, defaultState}) {
+export default function MsgBoard({msg, setMsg, startGame, defaultState}) {
     if (msg.type === 'ongoing') {
         return null;
     }
@@ -14,7 +14,7 @@ export default function MsgBoard({msg, setMsg, genGame, defaultState}) {
                         <button
                             className="msg__btn"
                             onClick={() => {
-                                genGame(true);
+                                startGame(true);
                                 setMsg(defaultState.current);
                             }}
                         >
