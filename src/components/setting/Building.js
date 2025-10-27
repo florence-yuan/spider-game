@@ -14,7 +14,7 @@ const bgColors = [
 ];
 
 export const windowImg = new Image();
-windowImg.src = process.env.PUBLIC_URL + "images/window_sprite.png";
+windowImg.src = process.env.PUBLIC_URL + "/images/window_sprite.png";
 
 const windowBounds = [
     [0, 62, 84],
