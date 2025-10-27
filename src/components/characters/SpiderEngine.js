@@ -30,7 +30,11 @@ const MARGINX = 10;
 const MARGINY = 10;
 
 const spiderSprite = new Image();
-spiderSprite.src = '/images/spider_sprite.png';
+spiderSprite.src = '../../images/spider_sprite.png';
+
+spiderSprite.addEventListener("load", () => {
+    console.log("hellow!!!")
+})
 
 const SPRITE_LEN = 4;
 
