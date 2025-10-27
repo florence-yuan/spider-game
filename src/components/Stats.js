@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 
 export default function Stats({gameState, handleGameOver, hasStarted}) {
-	const [timeleft, setTimeLeft] = useState(10);
+	const [timeleft, setTimeLeft] = useState(100);
 
 	useEffect(() => {
 		if (!hasStarted || gameState !== 'ongoing') {
-			setTimeLeft(10);
+			setTimeLeft(100);
 			return;
 		}
 
