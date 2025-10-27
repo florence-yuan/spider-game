@@ -32,9 +32,7 @@ const MARGINY = 10;
 const spiderSprite = new Image();
 spiderSprite.src = process.env.PUBLIC_URL + 'images/spider_sprite.png';
 
-spiderSprite.addEventListener("load", () => {
-    console.log("hellow!!!")
-})
+console.log("process.env.PUBLIC_URL", process.env.PUBLIC_URL)
 
 const SPRITE_LEN = 4;
 
