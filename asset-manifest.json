@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/spider-game/static/css/main.9546b80e.css",
+    "main.js": "/spider-game/static/js/main.be330ac1.js",
+    "static/js/592.fe1ce7f9.chunk.js": "/spider-game/static/js/592.fe1ce7f9.chunk.js",
+    "static/media/grainy.png": "/spider-game/static/media/grainy.27581f739964d3f34fe5.png",
+    "static/media/noise2.png": "/spider-game/static/media/noise2.53b0931a4ea86a1dffda.png",
+    "index.html": "/spider-game/index.html",
+    "main.9546b80e.css.map": "/spider-game/static/css/main.9546b80e.css.map",
+    "main.be330ac1.js.map": "/spider-game/static/js/main.be330ac1.js.map",
+    "592.fe1ce7f9.chunk.js.map": "/spider-game/static/js/592.fe1ce7f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9546b80e.css",
+    "static/js/main.be330ac1.js"
+  ]
+}
