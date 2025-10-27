@@ -99,12 +99,9 @@ export default function App() {
 			sceneTrans: handleSceneTrans,
 			gameOver: handleGameOver
 		};
-		// engine.handleSceneTrans = handleSceneTrans;
 
 		const spider = engine.getSpider();
 		spiderRef.current = spider;
-
-		console.log(spiderRef.current)
 	}, []);
 
 	function startGame(clearPrev = false){

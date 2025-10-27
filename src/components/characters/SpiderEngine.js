@@ -32,8 +32,6 @@ const MARGINY = 10;
 const spiderSprite = new Image();
 spiderSprite.src = process.env.PUBLIC_URL + '/images/spider_sprite.png';
 
-console.log("process.env.PUBLIC_URL", process.env.PUBLIC_URL)
-
 const SPRITE_LEN = 4;
 
 const SOUND_SRC = {
@@ -153,7 +151,6 @@ export class SpiderEngine extends FloorEngine {
                 }
                 if (this.jumpDir !== 0) {
                     const nextPosY = this.posY + this.jumpDir * SPEED.VER_JUMP;
-                    // console.log(nextPosY, this.jumpDir)
                     if (!this.breakFloor &&
                         nextPosY < this.getFloorStartHeight(this.curFloor) - SPIDER_HEIGHT / 2 &&
                         this.jumpDir === -1
@@ -168,7 +165,6 @@ export class SpiderEngine extends FloorEngine {
                             if (overlapWidth < SPIDER_WIDTH / 2) {
                                 this.curFloor--;
                                 this.breakFloor = true;
-                                // console.log('break', this.curFloor);
                                 if (this.curFloor < VIEW.BOTTOM - 1 && this.curFloor >= VIEW.TOP) {
                                     this.shiftView(FLOOR_HEIGHT);
                                 }
@@ -187,14 +183,10 @@ export class SpiderEngine extends FloorEngine {
                     else {
                         this.posY = nextPosY;
                         this.posX += this.jumpSlant * SPEED.HOR_WALK;
-                        // console.log('walk')
                     }
                     if (this.jumpDir === 1 && nextPosY > noJumpPosY) {
                         this.jumpDir = 0;
                         this.jumpSlant = 0;
-                        // console.log('hey stop');
-                        // this.shiftView(noJumpPosY - this.posY);
-                        // console.log('shift by', noJumpPosY - this.posY)
                         this.posY = noJumpPosY;
                         this.breakFloor = false;
                         this.prevJumpEnd = document.timeline.currentTime;
@@ -227,7 +219,6 @@ export class SpiderEngine extends FloorEngine {
     }
 
     paintSpider(hasLine = false, state = STATE.NORMAL) {
-        console.log("paint me!")
         this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         if (hasLine) {
             this.context.lineTo(this.descendX, this.posY + 15);
@@ -291,9 +282,7 @@ export class SpiderEngine extends FloorEngine {
             this.context.strokeStyle = "white";
             this.context.beginPath();
             this.context.moveTo(this.descendX, this.posY + 15);
-            console.log('begin', this.posY);
         } else {
-            // console.log('spider descend');
             this.posY = this.canvasHeight - window.innerHeight - SPIDER_HEIGHT + (timeStamp - this.startTimeStamp - SPEED.DIE_TIME) * SPEED.DESCEND_SPEED;
             this.paintSpider(true);
         }
@@ -302,7 +291,6 @@ export class SpiderEngine extends FloorEngine {
     }
 
     handleNewLife() {
-
         console.log("NEW LIFE");
         this.numLives--;
         this.isActive = false;
@@ -341,7 +329,6 @@ export class SpiderEngine extends FloorEngine {
                         this.isImmune = false;
                     }
                     SOUNDS.JUMP.play();
-                    console.log(threadWidth)
                     this.context.lineWidth = threadWidth - 2;
                     this.paintSpider(true);
                     threadWidth -= 2;
@@ -351,7 +338,6 @@ export class SpiderEngine extends FloorEngine {
     }
 
     resetSpider() {
-        console.log("DISABLE ACTIVE")
         this.isActive = false;
         this.numLives = 3;
         [this.posX, this.posY] = this.getSpiderPos(9, 3);

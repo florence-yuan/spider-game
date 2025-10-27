@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 
 export default function Stats({gameState, handleGameOver, hasStarted}) {
-	const [timeleft, setTimeLeft] = useState(100);
+	const [timeleft, setTimeLeft] = useState(10);
 
 	useEffect(() => {
 		if (!hasStarted || gameState !== 'ongoing') {
-			setTimeLeft(100);
+			setTimeLeft(10);
 			return;
 		}
 
@@ -13,7 +13,6 @@ export default function Stats({gameState, handleGameOver, hasStarted}) {
 			setTimeLeft(prev => {
 				if (prev <= 1) {
 					clearInterval(timer);
-					console.log("!!!TIME'S UP!!!");
 					handleGameOver('time-up');
 				}
 				return prev - 1;
@@ -21,7 +20,6 @@ export default function Stats({gameState, handleGameOver, hasStarted}) {
 		}, 1000);
 
 		return () => {
-			console.log("clear timer")
 			clearInterval(timer);
 		}
 	}, [gameState, hasStarted]);
