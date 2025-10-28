@@ -50,8 +50,8 @@ export class Building extends FloorEngine {
             for (let i = 0; i < this.numFloors; i++) {
                 const deviation = Math.floor(Math.random() * 100) - 50 - totDev;
                 this.floorBounds.push([
-                    this.getFloorStartWidth(i, deviation),
-                    this.getFloorStartHeight(i),
+                    this.getFloorStartX(i, deviation),
+                    this.getFloorStartY(i),
                     this.getFloorWidth(i),
                     FLOOR_HEIGHT
                 ]);
@@ -150,6 +150,10 @@ export class Building extends FloorEngine {
         }
     }
 
+    startPlatformMotion() {
+        this.platform.startMotion();
+    }
+
     paintBuilding() {
         const ctx = this.context;
 /*         ctx.fillStyle = "#3a1b29";
@@ -159,8 +163,8 @@ export class Building extends FloorEngine {
         ctx.closePath(); */
 
         this.platformBounds = [
-            this.getFloorStartWidth(-1, 0),
-            this.getFloorStartHeight(-1),
+            this.getFloorStartX(-1, 0),
+            this.getFloorStartY(-1),
             this.getFloorWidth(-1),
             FLOOR_HEIGHT
         ];

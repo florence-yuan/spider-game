@@ -9,8 +9,6 @@ const SPEED = {
     VER_JUMP: (FLOOR_HEIGHT + BRICK_HEIGHT) / 3,
 };
 
-const ERROR_MARGIN = 5;
-
 const sprite = new Image();
 sprite.src = process.env.PUBLIC_URL + '/images/guest_sprite.png';
 

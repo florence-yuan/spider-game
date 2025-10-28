@@ -66,14 +66,14 @@ export default function App() {
 			return;
 
 		spiderRef.current.setKeyPresses(e.key, true);
-	}, [spiderRef.current]);
+	}, []);
 
 	const handleKeyup = useCallback((e) => {
 		if (!spiderRef.current)
 			return;
 
 		spiderRef.current.setKeyPresses(e.key, false);
-	}, [spiderRef.current]);
+	}, []);
 
 	const genGame = useCallback((clearPrev = false) => {
 		if (clearPrev) {
@@ -158,7 +158,11 @@ export default function App() {
 				startGame={startGame}
 				defaultState={defaultState}
 			/>
-			{!hasStarted && <div className="modal-wrapper">
+			{!hasStarted && <div className="modal">
+				<div className="modal__dirs">
+					Help the spider reach the top floor of the infinity hotel using <code>a</code> and <code>d</code> to move horizontally and <code>k</code> to jump.
+					Be careful to avoid the guest clones!
+				</div>
 				<button
 					className="start-game"
 					onClick={() => {

@@ -32,9 +32,12 @@ export class Platform extends Floor {
         window.requestAnimationFrame(this.platformFloat);
     }
 
+    startMotion() {
+        window.requestAnimationFrame(this.platformFloat);
+    }
+
     paintPlatform() {
         this.paintFloor(false, -DEVIATION, 1);
         this.prevTimeStamp = document.timeline.currentTime;
-        window.requestAnimationFrame(this.platformFloat);
     }
 }

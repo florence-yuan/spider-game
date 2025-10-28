@@ -47,12 +47,13 @@ for (let [sound, src] of Object.entries(SOUND_SRC)) {
 }
 
 export class SpiderEngine extends FloorEngine {
-    constructor(ctx, canvasWidth, canvasHeight, startFloor, removeBricks, hasBricks, shiftView, nextScene) {
+    constructor(ctx, canvasWidth, canvasHeight, startFloor, floorBounds, removeBricks, hasBricks, shiftView, nextScene) {
         super();
         this.context = ctx;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.curFloor = startFloor;
+        this.floorBounds = floorBounds;
         this.removeBricks = removeBricks;
         this.hasBricks = hasBricks;
         this.shiftView = shiftView;
@@ -80,6 +81,11 @@ export class SpiderEngine extends FloorEngine {
     }
 
     #keyPresses = [];
+
+    clampX(posX) {
+        // TODO: Add upper bound
+        return Math.min(this.floorBounds[0] + this.floorBounds[2] - spiderSprite.naturalWidth / SPRITE_LEN + 40, Math.max(this.floorBounds[0], posX));
+    }
 
     spiderGameLoop(timeStamp) {
         if (!this.isActive) {
@@ -136,11 +142,12 @@ export class SpiderEngine extends FloorEngine {
             if (this.hasSilk) {
                 // TODO: Manage silk coordination
             } else {
+                /* Boost speed if jumping */
                 const jumpBoost = this.jumpDir === -1 ? 5 : 1;
                 if (this.#keyPresses.a) {
-                    this.posX -= SPEED.HOR_WALK * jumpBoost;
+                    this.posX = this.clampX(this.posX - SPEED.HOR_WALK * jumpBoost);
                 } else if (this.#keyPresses.d) {
-                    this.posX += SPEED.HOR_WALK * jumpBoost;
+                    this.posX = this.clampX(this.posX + SPEED.HOR_WALK * jumpBoost);
                 }
     
                 const noJumpPosY = this.getSpiderPosY(this.curFloor);
@@ -152,7 +159,7 @@ export class SpiderEngine extends FloorEngine {
                 if (this.jumpDir !== 0) {
                     const nextPosY = this.posY + this.jumpDir * SPEED.VER_JUMP;
                     if (!this.breakFloor &&
-                        nextPosY < this.getFloorStartHeight(this.curFloor) - SPIDER_HEIGHT / 2 &&
+                        nextPosY < this.getFloorStartY(this.curFloor) - SPIDER_HEIGHT / 2 &&
                         this.jumpDir === -1
                     ) {
                         if (this.curFloor >= 0) {
@@ -176,13 +183,13 @@ export class SpiderEngine extends FloorEngine {
                         }
                     }
                     else if (this.breakFloor &&
-                        nextPosY <= this.getFloorStartHeight(this.curFloor + 1) - SPIDER_HEIGHT * 2 - BRICK_HEIGHT) {
+                        nextPosY <= this.getFloorStartY(this.curFloor + 1) - SPIDER_HEIGHT * 2 - BRICK_HEIGHT) {
                         this.jumpDir = 1;
                         this.breakFloor = false;
                     }
                     else {
                         this.posY = nextPosY;
-                        this.posX += this.jumpSlant * SPEED.HOR_WALK;
+                        this.posX = this.clampX(this.posX + this.jumpSlant * SPEED.HOR_WALK);
                     }
                     if (this.jumpDir === 1 && nextPosY > noJumpPosY) {
                         this.jumpDir = 0;
@@ -238,11 +245,13 @@ export class SpiderEngine extends FloorEngine {
     }
 
     getSpiderPosX(floorID, pos) {
-        return this.getFloorStartWidth(floorID) + pos * SPIDER_WIDTH / 2;
+        // console.log(this.floorBounds[floorID][0], this.getFloorStartWidth(floorID))
+        return this.floorBounds[0] + pos * SPIDER_WIDTH / 2;
+        // return this.getFloorStartWidth(floorID) + pos * SPIDER_WIDTH / 2;
     }
 
     getSpiderPosY(floorID) {
-        return this.getFloorStartHeight(floorID) + FLOOR_HEIGHT - SPIDER_HEIGHT;
+        return this.getFloorStartY(floorID) + FLOOR_HEIGHT - SPIDER_HEIGHT;
     }
 
     getSpiderPos(floorID, pos) {

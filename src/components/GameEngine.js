@@ -57,6 +57,7 @@ export class GameEngine {
             this.canvasWidth,
 			this.canvasHeight,
             this.numFloors - 1,
+            this.building.floorBounds[this.numFloors - 1],
             this.removeBricks,
             this.hasBricks,
             this.shiftView,
@@ -66,8 +67,9 @@ export class GameEngine {
     }
 
     startGame() {
-        this.guests.startGuests();
+        // this.guests.startGuests();
         this.spider.startSpider();
+        this.building.startPlatformMotion();
 
         // this.spider.paintSpider();
         console.log('view shift', this.viewShift)
