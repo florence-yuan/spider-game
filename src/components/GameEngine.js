@@ -67,7 +67,7 @@ export class GameEngine {
     }
 
     startGame() {
-        // this.guests.startGuests();
+        this.guests.startGuests();
         this.spider.startSpider();
         this.building.startPlatformMotion();
 
